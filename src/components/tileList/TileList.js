@@ -1,15 +1,24 @@
 import React from "react";
-import Tile from "../../components/tile/Tile";
+import { Tile } from "../tile/Tile";
 
 
-export const TileList = (tileListArray) => {
+export const TileList = ({ contacts }) => {
+  const tileListResorted = contacts.map(({ name, ...description }) => (
+    {
+      tileName: name,
+      description: Object.values(description)
+    }
+  ));
+
   return (
-    <div><ul >
-      {tileListArray.map((objectOfArray, index) => (
-        const [name, ...rest] = objectOfArray;
-      ))}
-    </ul>
+    <div>
+      <ul>
+        {tileListResorted.map((tile, index) => (
+          <li key={index}>
+            <Tile tileName={tile.tileName} description={tile.description} />
+          </li>
+        ))}
+      </ul>
     </div>
-
   );
 };
